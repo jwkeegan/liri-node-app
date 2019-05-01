@@ -41,7 +41,7 @@ function concertThis() {
     var artist = args[3];
 
     axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp").then(
-        function(response) {
+        function (response) {
 
             var res = response.data;
             console.log("-------------------------");
@@ -50,7 +50,7 @@ function concertThis() {
             var date;
 
             for (i = 0; i < res.length; i++) {
-                
+
                 name = res[i].venue.name;
                 location = res[i].venue.city;
                 if (res[i].venue.region) location += ", " + res[i].venue.region;
@@ -78,7 +78,7 @@ function spotifyThisSong() {
         }
     }
 
-    spotify.search({ type: "track", query: song, limit: 1}, function(err,response) {
+    spotify.search({ type: "track", query: song, limit: 1 }, function (err, response) {
 
         if (err) return console.log(err);
 
@@ -103,10 +103,38 @@ function spotifyThisSong() {
 
 function movieThis() {
 
+    var movie;
+    if (args.length < 4) movie = "Mr. Nobody";
+    else {
+        movie = args[3];
+        for (i = 4; i < args.length; i++) {
+            movie += "+" + args[i];
+        }
+    }
+
+    axios.get("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy").then(
+        function (response) {
+            console.log("-------------------------");
+            console.log("Title: " + response.data.Title);
+            console.log("Release Year: " + response.data.Year);
+            for (i = 0; i < response.data.Ratings.length; i++) {
+                if (response.data.Ratings[i].Source == "Internet Movie Database" ||
+                    response.data.Ratings[i].Source == "Rotten Tomatoes") {
+                    console.log(response.data.Ratings[i].Source + " rating: " + response.data.Ratings[i].Value);
+                }
+            }
+            console.log("Country of Production: " + response.data.Country);
+            console.log("Language(s): " + response.data.Language);
+            console.log("Plot: " + response.data.Plot);
+            console.log("Major Actors: " + response.data.Actors);
+            console.log("-------------------------");
+        }
+    );
+
 }
 
 function doWhatItSays() {
-    fs.readFile("random.txt", "utf8", function(err, data) {
+    fs.readFile("random.txt", "utf8", function (err, data) {
         if (err) return console.log(err);
 
         var command = data.split(",")[0];
