@@ -1,10 +1,10 @@
 require("dotenv").config();
 var axios = require("axios");
 var moment = require("moment");
-require("node-spotify-api");
+var Spotify = require("node-spotify-api");
 var keys = require("./keys.js");
 
-// var spotify = new Spotify(keys.spotify);
+var spotify = new Spotify(keys.spotify);
 
 var args = process.argv;
 var command = args[2];
@@ -62,16 +62,42 @@ function concertThis() {
                 console.log("-------------------------");
 
             }
-            // console.log(response.data.length);
-            // console.log(response.data[0]);
-            // console.log(response.data[1]);
-            // console.log(response.data[2]);
         }
     );
 }
 
 function spotifyThisSong() {
     
+    var song;
+    if (args.length < 4) song = "The Sign";
+    else {
+        song = args[3];
+        for (i = 4; i < args.length; i++) {
+            song += " " + args[i];
+        }
+    }
+
+    spotify.search({ type: "track", query: song, limit: 1}, function(err,response) {
+
+        if (err) return console.log(err);
+
+        res = response.tracks.items;
+        var artists = res[0].artists[0].name;
+        for (i = 1; i < res[0].artists.length; i++) {
+            artists += ", " + res[0].artists[i].name;
+        }
+        var name = res[0].name;
+        var link = res[0].preview_url;
+        var album = res[0].album.name;
+
+        console.log("-------------------------");
+        console.log("Song: " + name);
+        console.log("Artist(s): " + artists);
+        console.log("Link: " + link);
+        console.log("Album: " + album);
+        console.log("-------------------------");
+
+    });
 }
 
 function movieThis() {
