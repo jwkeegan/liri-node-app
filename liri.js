@@ -2,6 +2,7 @@ require("dotenv").config();
 var axios = require("axios");
 var moment = require("moment");
 var Spotify = require("node-spotify-api");
+var fs = require("fs");
 var keys = require("./keys.js");
 
 var spotify = new Spotify(keys.spotify);
@@ -67,7 +68,7 @@ function concertThis() {
 }
 
 function spotifyThisSong() {
-    
+
     var song;
     if (args.length < 4) song = "The Sign";
     else {
@@ -105,5 +106,22 @@ function movieThis() {
 }
 
 function doWhatItSays() {
+    fs.readFile("random.txt", "utf8", function(err, data) {
+        if (err) return console.log(err);
 
+        var command = data.split(",")[0];
+        args[3] = data.split(",")[1];
+        switch (command) {
+            case "concert-this":
+                concertThis();
+                break;
+            case "spotify-this-song":
+                spotifyThisSong();
+                break;
+            case "movie-this":
+                movieThis();
+                break;
+        }
+
+    })
 }
