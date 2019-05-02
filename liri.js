@@ -39,9 +39,20 @@ function concertThis() {
     }
 
     var artist = args[3];
+    if (args.length > 4) {
+        for (i = 4; i < args.length; i++) {
+            artist += "+" + args[i];
+        }
+    }
 
     axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp").then(
         function (response) {
+
+            if (response.status !== 200) {
+                return console.log("Request error: " + response.status + ": " + response.statusText);
+            } else if (response.data.length == 0) {
+                return console.log("No concerts found!");
+            }
 
             var res = response.data;
             console.log("-------------------------");
@@ -64,7 +75,9 @@ function concertThis() {
 
             }
         }
-    );
+    ).catch(function(error) {
+        console.log(error.response.status + ": " + error.response.statusText);
+    });
 }
 
 function spotifyThisSong() {
@@ -120,7 +133,7 @@ function movieThis() {
             for (i = 0; i < response.data.Ratings.length; i++) {
                 if (response.data.Ratings[i].Source == "Internet Movie Database" ||
                     response.data.Ratings[i].Source == "Rotten Tomatoes") {
-                    console.log(response.data.Ratings[i].Source + " rating: " + response.data.Ratings[i].Value);
+                    console.log(response.data.Ratings[i].Source + " Rating: " + response.data.Ratings[i].Value);
                 }
             }
             console.log("Country of Production: " + response.data.Country);
