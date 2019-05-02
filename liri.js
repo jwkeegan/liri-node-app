@@ -151,7 +151,7 @@ function doWhatItSays() {
         if (err) return console.log(err);
 
         var command = data.split(",")[0];
-        args[3] = data.split(",")[1];
+        args[3] = data.split(",")[1].trim();
         switch (command) {
             case "concert-this":
                 concertThis();
