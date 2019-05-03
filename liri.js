@@ -1,3 +1,5 @@
+// Require packages & setup spotify keys
+
 require("dotenv").config();
 var axios = require("axios");
 var moment = require("moment");
@@ -7,9 +9,12 @@ var keys = require("./keys.js");
 
 var spotify = new Spotify(keys.spotify);
 
+// Take in command line args
 var args = process.argv;
 var command = args[2];
 
+// Switch for Command: each of four commands calls respective command,
+// If no valid command was found, show user valid commands
 switch (command) {
     case "concert-this":
         concertThis();
@@ -31,13 +36,17 @@ switch (command) {
         console.log("do-what-it-says");
 }
 
+// Function for command concert-this
+// Take in artist and find upcoming concerts
 function concertThis() {
 
+    // if there isn't an arg after concert-this, ask for artist and end
     if (args.length < 4) {
         console.log("Please enter artist or band name");
         return;
     }
 
+    // store artist (including spaces)
     var artist = args[3];
     if (args.length > 4) {
         for (i = 4; i < args.length; i++) {
@@ -45,23 +54,27 @@ function concertThis() {
         }
     }
 
+    // axios call to bands in town to get concert info
     axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp").then(
         function (response) {
 
+            // if there is an issue or there is no info, handle error here
             if (response.status !== 200) {
                 return console.log("Request error: " + response.status + ": " + response.statusText);
             } else if (response.data.length == 0) {
                 return console.log("No concerts found!");
             }
 
+            // store response data and initialize variables
             var res = response.data;
-            console.log("-------------------------");
             var name;
             var location;
             var date;
 
+            console.log("-------------------------");
             for (i = 0; i < res.length; i++) {
 
+                // grab info from response and format date into MM/DD/YYYY
                 name = res[i].venue.name;
                 location = res[i].venue.city;
                 if (res[i].venue.region) location += ", " + res[i].venue.region;
@@ -75,13 +88,19 @@ function concertThis() {
 
             }
         }
-    ).catch(function(error) {
+    )
+    // catch errors and display error code and text
+    .catch(function(error) {
         console.log(error.response.status + ": " + error.response.statusText);
     });
 }
 
+// Function spotify-this-song
+// take in song and display artist, album, song name, and spotify link
 function spotifyThisSong() {
 
+    // store song (including spaces)
+    // if there is no song in command line, default to "The Sign"
     var song;
     if (args.length < 4) song = "The Sign";
     else {
@@ -91,10 +110,15 @@ function spotifyThisSong() {
         }
     }
 
+    // use spotify search function setup with developer keys
     spotify.search({ type: "track", query: song, limit: 1 }, function (err, response) {
 
-        if (err) return console.log(err);
+        // if there is an error, display it
+        if (err) {
+            return console.log(err);
+        }
 
+        // store response and collect relevant info
         res = response.tracks.items;
         var artists = res[0].artists[0].name;
         for (i = 1; i < res[0].artists.length; i++) {
@@ -104,6 +128,7 @@ function spotifyThisSong() {
         var link = res[0].preview_url;
         var album = res[0].album.name;
 
+        // display info
         console.log("-------------------------");
         console.log("Song: " + name);
         console.log("Artist(s): " + artists);
@@ -114,8 +139,13 @@ function spotifyThisSong() {
     });
 }
 
+// Function movie-this
+// User inputs movie and liri displays Title, Release Year, IMDB & Rotten Tomatoes ratings,
+// Country (production), Language, Plot, and Actors
 function movieThis() {
 
+    // Store user requested movie (including spaces)
+    // if no input, default to "Mr. Nobody"
     var movie;
     if (args.length < 4) movie = "Mr. Nobody";
     else {
@@ -125,11 +155,15 @@ function movieThis() {
         }
     }
 
+    // use axios to access omdbapi to get data
     axios.get("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy").then(
         function (response) {
+            
+            // display relevant info
             console.log("-------------------------");
             console.log("Title: " + response.data.Title);
             console.log("Release Year: " + response.data.Year);
+            // for loop to loop through ratings and look for IMDB and Rotten Tomatoes ratings
             for (i = 0; i < response.data.Ratings.length; i++) {
                 if (response.data.Ratings[i].Source == "Internet Movie Database" ||
                     response.data.Ratings[i].Source == "Rotten Tomatoes") {
@@ -146,11 +180,21 @@ function movieThis() {
 
 }
 
+// Function do-what-is-says
+// If user doesn't know what they want to do, take text from random.txt
 function doWhatItSays() {
     fs.readFile("random.txt", "utf8", function (err, data) {
-        if (err) return console.log(err);
 
+        // log error and return if applicable
+        if (err) {
+            return console.log(err);
+        }
+
+        // first half of random.txt is command,
+        // second half is search term
         var command = data.split(",")[0];
+
+        // replace args[3] with search term, and call the function in random.txt
         args[3] = data.split(",")[1].trim();
         switch (command) {
             case "concert-this":
