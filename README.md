@@ -37,10 +37,11 @@ LIRI will also log all responses to a file named `log.txt`
         ```
     Should no movie be given, LIRI will search for "Mr. Nobody"
 
-    ![movie-this function](./assets/movie-this-song.png)
+    ![movie-this function](./assets/movie-this.png)
 
 4. `node liri.js do-what-it-says`
 
     * LIRI will read the `random.txt` file and run the command and search term, both given by the file
 
+    ![do-what-it-says input](./assets/random-data.png)
     ![do-what-it-says function](./assets/do-what-it-says.png)
