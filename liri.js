@@ -71,7 +71,6 @@ function concertThis() {
             var location;
             var date;
 
-            console.log("-------------------------");
             for (i = 0; i < res.length; i++) {
 
                 // grab info from response and format date into MM/DD/YYYY
@@ -81,18 +80,31 @@ function concertThis() {
                 location += ", " + res[i].venue.country;
                 date = moment(res[i].datetime).format("MM/DD/YYYY");
 
-                console.log("Venue: " + name);
-                console.log("Location: " + location);
-                console.log("Date of Event: " + date);
-                console.log("-------------------------");
+                var info = [
+                    "Venue: " + name,
+                    "Location: " + location,
+                    "Date of Event: " + date,
+                    "-------------------------\n"
+                ].join("\n");
+
+                // log and display info
+                fs.appendFile("log.txt", info, function (err) {
+                    if (err) throw err;
+                    console.log(info);
+                });
+
+                // console.log("Venue: " + name);
+                // console.log("Location: " + location);
+                // console.log("Date of Event: " + date);
+                // console.log("-------------------------");
 
             }
         }
     )
-    // catch errors and display error code and text
-    .catch(function(error) {
-        console.log(error.response.status + ": " + error.response.statusText);
-    });
+        // catch errors and display error code and text
+        .catch(function (error) {
+            console.log(error.response.status + ": " + error.response.statusText);
+        });
 }
 
 // Function spotify-this-song
@@ -128,13 +140,26 @@ function spotifyThisSong() {
         var link = res[0].preview_url;
         var album = res[0].album.name;
 
-        // display info
-        console.log("-------------------------");
-        console.log("Song: " + name);
-        console.log("Artist(s): " + artists);
-        console.log("Link: " + link);
-        console.log("Album: " + album);
-        console.log("-------------------------");
+        var info = [
+            "Song: " + name,
+            "Artist(s): " + artists,
+            "Link: " + link,
+            "Album: " + album,
+            "-------------------------\n"
+        ].join("\n");
+
+        // log and display info
+        fs.appendFile("log.txt", info, function (err) {
+            if (err) throw err;
+            console.log(info);
+        });
+
+        // // display info
+        // console.log("Song: " + name);
+        // console.log("Artist(s): " + artists);
+        // console.log("Link: " + link);
+        // console.log("Album: " + album);
+        // console.log("-------------------------");
 
     });
 }
@@ -158,23 +183,56 @@ function movieThis() {
     // use axios to access omdbapi to get data
     axios.get("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy").then(
         function (response) {
-            
-            // display relevant info
-            console.log("-------------------------");
-            console.log("Title: " + response.data.Title);
-            console.log("Release Year: " + response.data.Year);
-            // for loop to loop through ratings and look for IMDB and Rotten Tomatoes ratings
+
+            var ratingsArray = [];
             for (i = 0; i < response.data.Ratings.length; i++) {
                 if (response.data.Ratings[i].Source == "Internet Movie Database" ||
                     response.data.Ratings[i].Source == "Rotten Tomatoes") {
-                    console.log(response.data.Ratings[i].Source + " Rating: " + response.data.Ratings[i].Value);
+                    ratingsArray.push(response.data.Ratings[i].Source + " Rating: " + response.data.Ratings[i].Value);
                 }
             }
-            console.log("Country of Production: " + response.data.Country);
-            console.log("Language(s): " + response.data.Language);
-            console.log("Plot: " + response.data.Plot);
-            console.log("Major Actors: " + response.data.Actors);
-            console.log("-------------------------");
+
+            var info = [
+                "Title: " + response.data.Title,
+                "Release Year: " + response.data.Year
+            ];
+
+            for (var key in ratingsArray) {
+                info.push(ratingsArray[key]);
+            }
+
+            info.push(
+                "Country of Production: " + response.data.Country,
+                "Language(s): " + response.data.Language,
+                "Plot: " + response.data.Plot,
+                "Major Actors: " + response.data.Actors,
+                "-------------------------\n"
+            );
+
+            info = info.join("\n");
+
+            // log and display info
+            fs.appendFile("log.txt", info, function (err) {
+                if (err) throw err;
+                console.log(info);
+            });
+
+            // // display relevant info
+            // console.log("-------------------------");
+            // console.log("Title: " + response.data.Title);
+            // console.log("Release Year: " + response.data.Year);
+            // // for loop to loop through ratings and look for IMDB and Rotten Tomatoes ratings
+            // for (i = 0; i < response.data.Ratings.length; i++) {
+            //     if (response.data.Ratings[i].Source == "Internet Movie Database" ||
+            //         response.data.Ratings[i].Source == "Rotten Tomatoes") {
+            //         console.log(response.data.Ratings[i].Source + " Rating: " + response.data.Ratings[i].Value);
+            //     }
+            // }
+            // console.log("Country of Production: " + response.data.Country);
+            // console.log("Language(s): " + response.data.Language);
+            // console.log("Plot: " + response.data.Plot);
+            // console.log("Major Actors: " + response.data.Actors);
+            // console.log("-------------------------");
         }
     );
 
