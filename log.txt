@@ -1,92 +1,23 @@
-Title: Fight Club
-Release Year: 1999
-Internet Movie Database Rating: 8.8/10
-Rotten Tomatoes Rating: 79%
-Country of Production: USA, Germany
-Language(s): English
-Plot: An insomniac office worker and a devil-may-care soapmaker form an underground fight club that evolves into something much, much more.
-Major Actors: Edward Norton, Brad Pitt, Meat Loaf, Zach Grenier
+Song: The Sound Of Silence
+Artist(s): Disturbed
+Link: https://p.scdn.co/mp3-preview/27a108ea31c7a2e5b3622696d2cfe3885c59f913?cid=0cc7ce0f6b5a465d991b906b288a89d3
+Album: Immortalized
 -------------------------
-Title: The Matrix
-Release Year: 1999
-Internet Movie Database Rating: 8.7/10
-Rotten Tomatoes Rating: 88%
+Title: Caddyshack
+Release Year: 1980
+Internet Movie Database Rating: 7.3/10
+Rotten Tomatoes Rating: 74%
 Country of Production: USA
 Language(s): English
-Plot: A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.
-Major Actors: Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss, Hugo Weaving
+Plot: An exclusive golf course has to deal with a brash new member and a destructive dancing gopher.
+Major Actors: Chevy Chase, Rodney Dangerfield, Ted Knight, Michael O'Keefe
 -------------------------
-Song: Blank Space
-Artist(s): Taylor Swift
-Link: null
-Album: 1989
--------------------------
-Song: Bad Company
-Artist(s): Five Finger Death Punch
-Link: https://p.scdn.co/mp3-preview/c5f003381fb9810398a39b8146632fd98f24b41a?cid=0cc7ce0f6b5a465d991b906b288a89d3
-Album: War Is the Answer
--------------------------
-Venue: Heinz Field
-Location: Pittsburgh, PA, United States
-Date of Event: 05/18/2019
--------------------------
-Venue: Broncos Stadium at Mile High
-Location: Denver, CO, United States
-Date of Event: 06/08/2019
--------------------------
-Venue: Autzen Stadium
-Location: Eugene, OR, United States
-Date of Event: 06/29/2019
--------------------------
-Venue: Heinz Field
-Location: Pittsburgh, PA, United States
-Date of Event: 05/18/2019
--------------------------
-Venue: Broncos Stadium at Mile High
-Location: Denver, CO, United States
-Date of Event: 06/08/2019
--------------------------
-Venue: Autzen Stadium
-Location: Eugene, OR, United States
-Date of Event: 06/29/2019
--------------------------
-Venue: U.S. Bank Stadium
-Location: Minneapolis, MN, United States
-Date of Event: 05/03/2019
--------------------------
-Venue: U.S. Bank Stadium
-Location: Minneapolis, MN, United States
-Date of Event: 05/04/2019
--------------------------
-Venue: Heinz Field
-Location: Pittsburgh, PA, United States
-Date of Event: 05/18/2019
--------------------------
-Venue: Broncos Stadium at Mile High
-Location: Denver, CO, United States
-Date of Event: 06/08/2019
--------------------------
-Venue: Autzen Stadium
-Location: Eugene, OR, United States
-Date of Event: 06/29/2019
--------------------------
-undefinedVenue: U.S. Bank Stadium
-Location: Minneapolis, MN, United States
-Date of Event: 05/03/2019
--------------------------
-Venue: U.S. Bank Stadium
-Location: Minneapolis, MN, United States
-Date of Event: 05/04/2019
--------------------------
-Venue: Heinz Field
-Location: Pittsburgh, PA, United States
-Date of Event: 05/18/2019
--------------------------
-Venue: Broncos Stadium at Mile High
-Location: Denver, CO, United States
-Date of Event: 06/08/2019
--------------------------
-Venue: Autzen Stadium
-Location: Eugene, OR, United States
-Date of Event: 06/29/2019
+Title: The Lord of the Rings: The Fellowship of the Ring
+Release Year: 2001
+Internet Movie Database Rating: 8.8/10
+Rotten Tomatoes Rating: 91%
+Country of Production: New Zealand, USA
+Language(s): English, Sindarin
+Plot: A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.
+Major Actors: Alan Howard, Noel Appleby, Sean Astin, Sala Baker
 -------------------------
