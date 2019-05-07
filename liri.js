@@ -71,6 +71,8 @@ function concertThis() {
             var location;
             var date;
 
+            var fullInfo;
+
             for (i = 0; i < res.length; i++) {
 
                 // grab info from response and format date into MM/DD/YYYY
@@ -87,11 +89,7 @@ function concertThis() {
                     "-------------------------\n"
                 ].join("\n");
 
-                // log and display info
-                fs.appendFile("log.txt", info, function (err) {
-                    if (err) throw err;
-                    console.log(info);
-                });
+                fullInfo += info;
 
                 // console.log("Venue: " + name);
                 // console.log("Location: " + location);
@@ -99,6 +97,12 @@ function concertThis() {
                 // console.log("-------------------------");
 
             }
+
+            // log and display info
+            fs.appendFile("log.txt", fullInfo, function (err) {
+                if (err) throw err;
+                console.log(fullInfo);
+            });
         }
     )
         // catch errors and display error code and text
