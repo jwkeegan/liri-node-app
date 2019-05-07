@@ -6,7 +6,7 @@ LIRI (Language Interpretation and Recognition Interface) is a command line user 
 
 LIRI will also log all responses to a file named `log.txt`
 
-![logged data](./assets/logged-data.png)
+![logged data](./assets/logged-info.png)
 
 ## Accepted Commands
 
